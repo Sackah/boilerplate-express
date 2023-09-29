@@ -4,6 +4,12 @@ let app = express();
 
 console.log("Hello World");
 
+app.use((req, res, next) => {
+    let string = `${req.method} ${req.path} - ${req.ip}`;
+    console.log(string);
+    next();
+});
+
 app.get("/", (req, res)=>{
     //res.send("Hello Express");
     res.sendFile(__dirname + "/views/index.html");
