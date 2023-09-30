@@ -13,6 +13,8 @@ app.use((req, res, next) => {
 
 app.use((bodyParser.urlencoded({extended : false})));
 
+app.use(bodyParser.json());
+
 app.get("/", (req, res)=>{
     //res.send("Hello Express");
     res.sendFile(__dirname + "/views/index.html");
@@ -63,7 +65,12 @@ app.route('/name').get((req, res)=>{
     res.json({
       "name" : `${firstName} ${lastName}`
     })
-  }).post(bodyParser.json());
+  }).post((req, res)=>{
+    let resolve = `${req.body.first} ${req.body.last}`;
+    res.json({
+        "name": resolve
+    })
+  });
 
 
 
